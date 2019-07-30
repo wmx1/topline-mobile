@@ -4,7 +4,7 @@ module.exports = ({ file }) => {
   let rootValue = file.dirname.indexOf(`node_modules${sep}vant`) !== -1
     ? 37.5
     : 75
-
+  console.log('rootValue', rootValue)
   return {
     plugins: {
       autoprefixer: {},

@@ -7,13 +7,27 @@
 
  import request from '@/utils/request'
 
- export const login = ({mobile, code}) => {
+ export const login = ({username, password}) => {
      return request({
          method: 'POST',
-         url: '/app/v1_0/authorizations',
+         url: 'http://nerisdev.csrc.gov.cn:3059/sys/admin/login',
          data: {
-             mobile,
-             code
+             username,
+             password
          }
      })
  }
+
+ /**
+ * 拉黑用户（加入黑名单）
+ */
+export const addBlacklist = userId => {
+    // 指向其他逻辑
+    return request({
+      method: 'POST',
+      url: '/app/v1_0/user/blacklists',
+      data: {
+        target: userId
+      }
+    })
+  }
