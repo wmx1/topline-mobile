@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="scroll-container">
     <van-nav-bar fixed left-arrow :title="q + ' 的搜索结果'" @click-left="$router.back()" />
    <van-list
     v-model="loading"
@@ -27,7 +27,6 @@ export default {
       finished: false,
       q: this.$route.params.q,
       page: 1,
-      perPage: 20
     };
   },
 
@@ -36,17 +35,26 @@ export default {
         const data = await getSearch({
             q: this.q,
             page: this.page,
-            perPage: this.perPage
+            perPage: 10
         })
-        this.list.push(data.results)
-        console.log('list', this.list)
+        
+        if(!data.results.length) {
+          //取消loading
+          this.loading = false
+
+          //设置数据加载结束
+          this.finished = true
+          return
+        }
+       
+        this.list.push(...data.results)
+
+        this.page += 1
         // 加载状态结束
         this.loading = false
-        this.finished = true
-        this.page += 1
     }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
@@ -56,7 +64,16 @@ export default {
 
 .van-list {
     margin-top: 75px;
+    // height: 500px;
 }
+
+// .scroll-container {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     bottom: 0;
+//     right: 0;
+// }
 </style>
 
 
