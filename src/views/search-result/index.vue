@@ -8,10 +8,35 @@
     @load="onLoad"
     >
     <van-cell
-        v-for="item in list"
-        :key="item.art_id"
-        :title="item.title"
+        v-for="articleItem in articles"
+        :key="articleItem.art_id"
+        :title="articleItem.title"
     >
+      <div slot="label">
+        <template v-if="articleItem.cover.type">
+            <van-grid :border="false" :column-num="3">
+              <van-grid-item
+                  v-for="(img, index) in articleItem.cover.images" 
+                  :key="index"
+              >
+                <van-image :src="img" lazy-load></van-image>
+              </van-grid-item>
+            </van-grid>
+        </template> 
+        <p>
+          <span>{{ articleItem.aut_name }}</span>
+          &nbsp;
+          <span>{{ articleItem.comm_count }}</span>
+          &nbsp;
+          <span>{{ articleItem.pubdate }}</span>
+          &nbsp;
+        </p>
+        <van-grid :column-num="3">
+            <van-grid-item @click="$isLogin()" text="评论"/>
+            <van-grid-item text="点赞"/>
+            <van-grid-item text="分享"/>
+        </van-grid>
+      </div>
     </van-cell>
     </van-list>
   </div>
@@ -22,7 +47,7 @@ import { getSearch } from '@/api/search'
 export default {
   data() {
     return {
-      list: [],
+      articles: [],
       loading: false,
       finished: false,
       q: this.$route.params.q,
@@ -47,7 +72,7 @@ export default {
           return
         }
        
-        this.list.push(...data.results)
+        this.articles.push(...data.results)
 
         this.page += 1
         // 加载状态结束

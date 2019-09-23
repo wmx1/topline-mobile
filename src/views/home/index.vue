@@ -20,7 +20,7 @@
               v-for="articleItem in channelItem.articles"
               :key="articleItem.art_id"
               :title="articleItem.title"
-              @click="$router.push({path: '/article'})"
+              @click="$router.push({name: 'article', query: { articleId: articleItem.art_id }})"
             >
               <div slot="label">
                 <template v-if="articleItem.cover">

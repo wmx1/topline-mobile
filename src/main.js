@@ -31,6 +31,17 @@ Vue.config.productionTip = false
 Vue.use(Vant)
 Vue.use(VeeValidate)
 Vue.use(Lazyload);
+
+Vue.prototype.$isLogin = () => {
+  console.log('isLogin User', store.state.user)
+  if(!store.state.user) {
+    router.push({
+      name: 'login'
+    })
+    return false
+  } 
+  return true
+}
 new Vue({
   router,
   store,
