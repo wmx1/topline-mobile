@@ -7,7 +7,7 @@
     </div>
 
     <!-- 作者信息 -->
-    <div class="author">
+    <!-- <div class="author">
       <van-image
         round
         width="1.5rem"
@@ -21,13 +21,12 @@
       </div>
 
       <van-button round size="small" type="info">+ 关注</van-button>
-    </div>
+    </div> -->
+    <auth-info :article="article"></auth-info>
+
     <div class="content" v-html="article.content"></div>
-    <div class="zan">
-        <van-button round size="small" hairline type="primary" plain icon="like-o">点赞</van-button>
-         &nbsp;&nbsp;&nbsp;&nbsp;
-        <van-button round size="small" hairline type="danger" plain icon="delete">不喜欢</van-button>   
-    </div>
+    <!-- 更多操作 -->
+    <more-action :article="article"></more-action>
     <!-- <div class="error">
         <p>
             网络超时，点击 <a href="#">刷新</a>试一试
@@ -37,8 +36,15 @@
 </template>
 
 <script>
-import { getArticleDetail } from "@/api/article";
+import { getArticleDetail } from "@/api/article"
+import authInfo from "@/views/article/components/auth-info"
+import moreAction from "@/views/article/components/more-action"
 export default {
+  components: {
+      authInfo,
+      moreAction
+  },
+
   data() {
     return {
       article: {
@@ -91,30 +97,6 @@ export default {
 .article-title {
   font-size: 40px;
   font-weight: 400;
-}
-
-.van-image /deep/ img {
-  border-radius: 50%;
-}
-
-.author {
-  padding: 10px 0;
-  display: flex;
-  .text {
-    flex: 1;
-    padding-left: 20px;
-    line-height: 2;
-    font-size: 24px;
-    .name {
-      // font-size: 16px;
-      margin: 0;
-    }
-    .time {
-      margin: 0;
-      // font-size: 14px;
-      color: #999;
-    }
-  }
 }
 
 .zan {
