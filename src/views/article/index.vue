@@ -32,6 +32,10 @@
             网络超时，点击 <a href="#">刷新</a>试一试
         </p>
     </div> -->
+    <!-- 评论列表 -->
+    <comment :source="articleId"></comment>
+    <!-- 回复列表 -->
+    <reply-list></reply-list>
   </div>
 </template>
 
@@ -39,10 +43,15 @@
 import { getArticleDetail } from "@/api/article"
 import authInfo from "@/views/article/components/auth-info"
 import moreAction from "@/views/article/components/more-action"
+import comment from "@/views/article/components/comment"
+import ReplyList from "@/views/article/components/reply-list"
+
 export default {
   components: {
       authInfo,
-      moreAction
+      moreAction,
+      comment,
+      ReplyList
   },
 
   data() {
@@ -64,6 +73,12 @@ export default {
     };
   },
 
+  computed: {
+    articleId () {
+      return this.$route.params.articleId
+    }
+  },
+
   created() {
     // this.loadArticle()
   },
@@ -77,7 +92,7 @@ export default {
         message: "加载中..."
       });
       try {
-        const data = await getArticleDetail(this.$route.query.articleId);
+        const data = await getArticleDetail(this.$route.params.articleId);
         this.article = data;
       } catch (err) {
         this.$toast("加载失败");
