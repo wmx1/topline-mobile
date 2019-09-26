@@ -35,7 +35,10 @@
     <!-- 评论列表 -->
     <comment :source="articleId"></comment>
     <!-- 回复列表 -->
-    <reply-list></reply-list>
+    <reply-list :articleId="articleId"></reply-list>
+
+    <!-- 发布文章评论 -->
+    <add-comment class="add-comment" :target="articleId" :article="article"/>
   </div>
 </template>
 
@@ -45,13 +48,15 @@ import authInfo from "@/views/article/components/auth-info"
 import moreAction from "@/views/article/components/more-action"
 import comment from "@/views/article/components/comment"
 import ReplyList from "@/views/article/components/reply-list"
+import AddComment from "./components/add-comment"
 
 export default {
   components: {
       authInfo,
       moreAction,
       comment,
-      ReplyList
+      ReplyList,
+      AddComment
   },
 
   data() {

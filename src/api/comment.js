@@ -18,3 +18,20 @@ export const getComments = ({
       }
     })
   }
+
+  /* 添加评论|回复 */
+  export const addComment = ({
+    target,
+    content,
+    articleId = null // 如果数据为 null，则 axios 不会发送该数据
+  }) => {
+    return request({
+      method: 'POST',
+      url: '/app/v1_0/comments',
+      data: { // axios 不会添加类型为 null 的数据
+        target, // 评论的目标id（评论文章即为文章id，对评论进行回复则为评论id）
+        content, // 评论内容
+        art_id: articleId // 文章id，对评论内容发表回复时，需要传递此参数，表明所属文章id。对文章进行评论，不要传此参数。
+      }
+    })
+  }
