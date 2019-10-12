@@ -71,7 +71,7 @@ export default {
           this.finished = true
           return
         }
-       
+         
         this.articles.push(...data.results)
 
         this.page += 1

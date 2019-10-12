@@ -48,7 +48,7 @@
       <van-tabbar-item icon="home-o">首页</van-tabbar-item>
       <van-tabbar-item icon="search">问答</van-tabbar-item>
       <van-tabbar-item icon="friends-o">视频</van-tabbar-item>
-      <van-tabbar-item icon="setting-o">我的</van-tabbar-item>
+      <van-tabbar-item icon="setting-o" @click="$router.push({ 'name': 'my' })">我的</van-tabbar-item>
     </van-tabbar>
     <!-- 更多操作的弹窗 -->
     <more-action 

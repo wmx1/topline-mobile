@@ -5,29 +5,36 @@
  * 遵循一个原则：不要直接在组件中发请求，都封装成函数进行调用
  */
 
- import request from '@/utils/request'
+import request from '@/utils/request'
 
- export const login = ({username, password}) => {
-     return request({
-         method: 'POST',
-         url: 'http://nerisdev.csrc.gov.cn:3059/sys/admin/login',
-         data: {
-             username,
-             password
-         }
-     })
- }
+export const login = ({ username, password }) => {
+  return request({
+    method: 'POST',
+    url: 'http://nerisdev.csrc.gov.cn:3059/sys/admin/login',
+    data: {
+      username,
+      password
+    }
+  })
+}
 
- /**
- * 拉黑用户（加入黑名单）
- */
+/**
+* 拉黑用户（加入黑名单）
+*/
 export const addBlacklist = userId => {
-    // 指向其他逻辑
-    return request({
-      method: 'POST',
-      url: '/app/v1_0/user/blacklists',
-      data: {
-        target: userId
-      }
-    })
-  }
+  // 指向其他逻辑
+  return request({
+    method: 'POST',
+    url: '/app/v1_0/user/blacklists',
+    data: {
+      target: userId
+    }
+  })
+}
+/* 获取当前登录用户的个人信息 */
+export const getCurrentUserInfo = () => {
+  return request({
+    method: 'GET',
+    url: `/app/v1_0/user`
+  })  
+}
